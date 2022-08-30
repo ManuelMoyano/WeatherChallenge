@@ -31,13 +31,13 @@ struct SelectedCityView: View {
                         Image(systemName: "drop.fill")
                             .font(.system(size: 20))
                             .foregroundColor(.blue)
-                        Text("\(dataResponse.data?[1].coordinates?[0].dates?[0].value ?? 0.0, specifier: "%.0f")%" )
+                        Text("\(dataResponse.data?[3].coordinates?[0].dates?[0].value ?? 0.0, specifier: "%.0f")%" )
                             .font(.system(size: 20))
                         
                     }
                 }
                 Spacer()
-                Image("\(Int(dataResponse.data?[2].coordinates?[0].dates?[0].value ?? 0.0))" )
+                Image("\(Int(dataResponse.data?[4].coordinates?[0].dates?[0].value ?? 0.0))" )
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
@@ -51,7 +51,7 @@ struct SelectedCityView: View {
         }
 
         .onAppear {
-            NetWorkingProvider.shared.getData(latitud: selectedCity.latitude, longitud: selectedCity.longitude){ response in
+            NetWorkingProvider.shared.getData(latitud: selectedCity.latitude, longitud: selectedCity.longitude, kValidDateTime: NetWorkingProvider.shared.kValidDateTimeForecastDays){ response in
                 dataResponse = response
             } failure: { error in
                 print(error ?? "No error description")

@@ -9,11 +9,12 @@ import SwiftUI
 
 @main
 struct WeatherChallengeApp: App {
-    
+    @State var locationViewModel = LocationViewModel()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(locationViewModel)
         }
     }
 }

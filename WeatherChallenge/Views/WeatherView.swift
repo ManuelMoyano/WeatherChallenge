@@ -29,8 +29,8 @@ struct WeatherView: View {
                         .font(.largeTitle)
                     }
                     HStack{
-                        Text("Humedad")
-                        Text("\(dataResponse.data?[1].coordinates?[0].dates?[0].value ?? 0.0, specifier: "%.0f")%" )
+                        Text("Prob.Lluvia")
+                        Text("\(dataResponse.data?[3].coordinates?[0].dates?[0].value ?? 0.0, specifier: "%.0f")%" )
                             .font(.largeTitle)
                     }
 //                    HStack{
@@ -40,7 +40,7 @@ struct WeatherView: View {
 //                    }
                 }
                 Spacer()
-                Image("\(Int(dataResponse.data?[2].coordinates?[0].dates?[0].value ?? 0.0))" )
+                Image("\(Int(dataResponse.data?[4].coordinates?[0].dates?[0].value ?? 0.0))" )
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
@@ -55,7 +55,7 @@ struct WeatherView: View {
         )
         .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
         .onAppear {
-            NetWorkingProvider.shared.getData(latitud: latitud, longitud: longitud){ response in
+            NetWorkingProvider.shared.getData(latitud: latitud, longitud: longitud, kValidDateTime: NetWorkingProvider.shared.kValidDateTimeForecastDays){ response in
                 dataResponse = response
             } failure: { error in
                 print(error ?? "No error description")

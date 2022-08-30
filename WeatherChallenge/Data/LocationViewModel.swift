@@ -9,7 +9,7 @@ import Foundation
 import CoreLocation
 import MapKit
 
-final class LocationViewModel: NSObject, ObservableObject {
+@MainActor final class LocationViewModel: NSObject, ObservableObject {
     @Published var userLocation: MKCoordinateRegion = .init()
     private let locationManager: CLLocationManager = .init()
     

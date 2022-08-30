@@ -16,11 +16,13 @@ final class NetWorkingProvider {
     private let kUsername = "freelance_moyano"
     private let kPassword = "06YIYQc5mo"
     private let kBaseUrl = "https://api.meteomatics.com/"
-    private let kValidDateTime = "now--today+7DT00:00Z:P1D"
-    private let kparameters = "t_2m:C,relative_humidity_2m:p,weather_symbol_1h:idx"
+    let kValidDateTimeForecastDays = "now--today+7DT00:00Z:P1D"
+    let kvalidDateTimeNowForecastHours = "now--tomorrowT00:00Z:PT1H"
+    private let kparameters = "t_2m:C,t_max_2m_24h:C,t_min_2m_24h:C,prob_precip_1h:p,weather_symbol_1h:idx"
     private let kFormat = "json"
     
-    func getData (latitud: Double, longitud: Double, success: @escaping (_ token: Response) -> (), failure: @escaping (_ error: Error?) -> ()){
+    
+    func getData (latitud: Double, longitud: Double, kValidDateTime: String, success: @escaping (_ token: Response) -> (), failure: @escaping (_ error: Error?) -> ()){
         
         
         let url = "\(kBaseUrl)/\(kValidDateTime)/\(kparameters)/\(latitud),\(longitud)/\(kFormat)"
