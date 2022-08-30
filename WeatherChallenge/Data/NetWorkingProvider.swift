@@ -17,7 +17,7 @@ final class NetWorkingProvider {
     private let kPassword = "06YIYQc5mo"
     private let kBaseUrl = "https://api.meteomatics.com/"
     let kValidDateTimeForecastDays = "now--today+7DT00:00Z:P1D"
-    let kvalidDateTimeNowForecastHours = "now--tomorrowT00:00Z:PT1H"
+    let kvalidDateTimeNowForecastHours = "now--now+23H:PT1H"
     private let kparameters = "t_2m:C,t_max_2m_24h:C,t_min_2m_24h:C,prob_precip_1h:p,weather_symbol_1h:idx"
     private let kFormat = "json"
     
@@ -41,6 +41,30 @@ final class NetWorkingProvider {
                 failure(response.error)
             }
         }
+    }
+    
+    func getcurrentTime (time: Bool, hours: Int, days: Int)-> [String] {
+        let now = Date.now
+        let formatter = DateFormatter()
+        var timeArray = [String]()
+        var dateArray = [String]()
+        
+        if time {
+            formatter.dateFormat = "HH"
+            for i in 0..<hours {
+                timeArray.append(formatter.string(from: now.addingTimeInterval(TimeInterval(3600*i))))
+            }
+            return timeArray
+        } else {
+        formatter.dateFormat = "E"
+            
+            for i in 0..<days {
+                dateArray.append(formatter.string(from: now.addingTimeInterval(TimeInterval(86400*i))))
+            }
+            
+            return dateArray
+        }
+        
     }
     
 }

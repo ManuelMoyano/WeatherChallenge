@@ -47,38 +47,15 @@ struct DetailView: View {
                 }
                 }
             }
-            Section{
-                List{
-                    ForEach (0..<7){ num in
-                        HStack{
-                            Text("Hoy")
-                            Image(systemName: "drop.fill")
-                                .foregroundColor(.blue)
-                            Text("\(dataResponseDays.data?[3].coordinates?[0].dates?[num].value ?? 0.0, specifier: "%.0f") %" )
-                            Image("\(Int(dataResponseDays.data?[4].coordinates?[0].dates?[0].value ?? 0.0))" )
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 30, height: 30)
-//                            Text("Tmax: \(dataResponseDays.data?[4].coordinates?[0].dates?[num].value ?? 0.0, specifier: "%.0f") IMG" )
-                            Text("Tmax: \(dataResponseDays.data?[1].coordinates?[0].dates?[num].value ?? 0.0, specifier: "%.0f") ºC" )
-                            Text("Tmin: \(dataResponseDays.data?[2].coordinates?[0].dates?[num].value ?? 0.0, specifier: "%.0f") ºC" )
-                        }
-                    }
-                }
-                .listStyle(.plain)
-            }
+            
+            ForecastHourView(selectedCity: selectedCity)
+            
+            ForecastDaysView(selectedCity: selectedCity)
+                
         }
-        
-        
-        
             .onAppear {
                 NetWorkingProvider.shared.getData(latitud: selectedCity.latitude, longitud: selectedCity.longitude, kValidDateTime: NetWorkingProvider.shared.kValidDateTimeForecastDays){ response in
                     dataResponseDays = response
-                } failure: { error in
-                    print(error ?? "No error description")
-                }
-                NetWorkingProvider.shared.getData(latitud: selectedCity.latitude, longitud: selectedCity.longitude, kValidDateTime: NetWorkingProvider.shared.kvalidDateTimeNowForecastHours){ response in
-                    dataResponseHours = response
                 } failure: { error in
                     print(error ?? "No error description")
                 }

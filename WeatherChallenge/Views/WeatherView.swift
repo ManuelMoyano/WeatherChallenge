@@ -17,49 +17,47 @@ struct WeatherView: View {
     
     var body: some View {
         
-        VStack(alignment: .leading){
-            Text(ubicacion)
-                .font(.system(size: 30))
-            
-            HStack{
-                VStack(alignment: .leading) {
-                    HStack{
-                        Text("Temperatura")
-                    Text("\(dataResponse.data?[0].coordinates?[0].dates?[0].value ?? 0.0, specifier: "%.1f") ºC" )
-                        .font(.largeTitle)
-                    }
-                    HStack{
-                        Text("Prob.Lluvia")
-                        Text("\(dataResponse.data?[3].coordinates?[0].dates?[0].value ?? 0.0, specifier: "%.0f")%" )
+        
+        ZStack {
+            Color.blue
+                .opacity(0.3)
+            VStack(alignment: .leading){
+                Text(ubicacion)
+                    .font(.system(size: 30, weight: .bold))
+                    .foregroundColor(.white)
+                
+                HStack{
+                    VStack(alignment: .leading) {
+                        HStack{
+                            Text("Temperatura")
+                        Text("\(dataResponse.data?[0].coordinates?[0].dates?[0].value ?? 0.0, specifier: "%.1f") ºC" )
                             .font(.largeTitle)
+                        }
+                        HStack{
+                            Text("Prob.Lluvia")
+                            Text("\(dataResponse.data?[3].coordinates?[0].dates?[0].value ?? 0.0, specifier: "%.0f")%" )
+                                .font(.largeTitle)
+                        }
                     }
-//                    HStack{
-//                        Text("Icono")
-//                        Text("\(dataResponse.data?[2].coordinates?[0].dates?[0].value ?? 0.0, specifier: "%.0f")" )
-//                            .font(.largeTitle)
-//                    }
+                    Spacer()
+                    Image("\(Int(dataResponse.data?[4].coordinates?[0].dates?[0].value ?? 0.0))" )
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 100)
                 }
-                Spacer()
-                Image("\(Int(dataResponse.data?[4].coordinates?[0].dates?[0].value ?? 0.0))" )
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 100)
+                
             }
+            .padding()
+            .padding(.leading,20)
+            .padding(.trailing,20)
+            .shadow(color: Color.blue.opacity(0.3), radius: 20, x: 0, y: 10)
+            .onAppear {
+                NetWorkingProvider.shared.getData(latitud: latitud, longitud: longitud, kValidDateTime: NetWorkingProvider.shared.kValidDateTimeForecastDays){ response in
+                    dataResponse = response
+                } failure: { error in
+                    print(error ?? "No error description")
+                }
         }
-        .padding()
-        .padding(.leading,20)
-        .padding(.trailing,20)
-        .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(.white, lineWidth: 4)
-        )
-        .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
-        .onAppear {
-            NetWorkingProvider.shared.getData(latitud: latitud, longitud: longitud, kValidDateTime: NetWorkingProvider.shared.kValidDateTimeForecastDays){ response in
-                dataResponse = response
-            } failure: { error in
-                print(error ?? "No error description")
-            }
         }
         
         
