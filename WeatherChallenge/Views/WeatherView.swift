@@ -21,6 +21,7 @@ struct WeatherView: View {
         ZStack {
             Color.blue
                 .opacity(0.3)
+                .cornerRadius(16)
             VStack(alignment: .leading){
                 Text(ubicacion)
                     .font(.system(size: 30, weight: .bold))
@@ -29,21 +30,30 @@ struct WeatherView: View {
                 HStack{
                     VStack(alignment: .leading) {
                         HStack{
-                            Text("Temperatura")
+                            Image(systemName: "thermometer")
+                                .font(.system(size: 20))
+//                                .opacity(0.4)
+                                .foregroundColor(.red)
+                                .shadow(color: .red, radius: 10, x: 1, y: 1)
                         Text("\(dataResponse.data?[0].coordinates?[0].dates?[0].value ?? 0.0, specifier: "%.1f") ºC" )
-                            .font(.largeTitle)
+                                .font(.system(size: 30, weight: .bold))
+                                .foregroundColor(.white)
                         }
                         HStack{
-                            Text("Prob.Lluvia")
+                            Image(systemName: "drop.fill")
+                                .foregroundColor(.blue)
+                                .opacity(0.4)
+                                .font(.system(size: 20))
                             Text("\(dataResponse.data?[3].coordinates?[0].dates?[0].value ?? 0.0, specifier: "%.0f")%" )
-                                .font(.largeTitle)
-                        }
+                        }                                .font(.system(size: 30, weight: .bold))
+                            .foregroundColor(.white)
                     }
                     Spacer()
                     Image("\(Int(dataResponse.data?[4].coordinates?[0].dates?[0].value ?? 0.0))" )
                         .resizable()
                         .scaledToFit()
                         .frame(width: 100, height: 100)
+                        .shadow(color: .blue, radius: 50, x: 7, y: 7)
                 }
                 
             }
@@ -59,8 +69,7 @@ struct WeatherView: View {
                 }
         }
         }
-        
-        
+        .frame(width: .infinity, height: 180)
     }
 }
 

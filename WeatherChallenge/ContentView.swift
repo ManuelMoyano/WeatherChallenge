@@ -25,7 +25,7 @@ struct ContentView: View {
                 WeatherView(ubicacion: "Ubicación Actual", latitud: Double(locationViewModel.userLocation.center.latitude), longitud: Double(locationViewModel.userLocation.center.longitude))
                     .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
                 Button {
-                    if selectedCities.locations.count < 2 {
+                    if selectedCities.locations.count < 5 {
                         showingPickingSheet.toggle()
                     } else {
                         showingCityAlert.toggle()
@@ -36,10 +36,9 @@ struct ContentView: View {
                 }.sheet(isPresented: $showingPickingSheet) {
                     Pickingview(selectedCities: selectedCities)
                 }
-                .alert("No puede agregar mas de 5 ciudades, por favor borre alguna", isPresented: $showingCityAlert) {
+                .alert("Can't add more than 5 cities, swipe to delete ", isPresented: $showingCityAlert) {
                     Button("OK") { }
                 }
-                Text("Ciudades Seleccionadas: \(selectedCities.locations.count)")
                 Spacer()
                     Section{
                         List{

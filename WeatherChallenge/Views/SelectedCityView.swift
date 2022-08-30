@@ -14,16 +14,19 @@ struct SelectedCityView: View {
     
     var body: some View {
         ZStack{
-            
+            Color.gray
+                .opacity(0.1)
+                .cornerRadius(16)
             HStack{
                 Text("\(selectedCity.name)")
-                    .font(.system(size: 30))
+                    .font(.system(size: 30, weight: .bold))
                     .padding()
                 VStack(alignment: .leading) {
                     HStack{
                         Image(systemName: "thermometer")
                             .font(.system(size: 20))
                             .foregroundColor(.red)
+                            .shadow(color: .red, radius: 5, x: 1, y: 1)
                     Text("\(dataResponse.data?[0].coordinates?[0].dates?[0].value ?? 0.0, specifier: "%.1f") ºC" )
                         .font(.system(size: 20))
                     }
@@ -31,6 +34,7 @@ struct SelectedCityView: View {
                         Image(systemName: "drop.fill")
                             .font(.system(size: 20))
                             .foregroundColor(.blue)
+                            .opacity(0.4)
                         Text("\(dataResponse.data?[3].coordinates?[0].dates?[0].value ?? 0.0, specifier: "%.0f")%" )
                             .font(.system(size: 20))
                         
@@ -41,15 +45,10 @@ struct SelectedCityView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
+                    .shadow(color: .blue, radius: 30, x: 7, y: 7)
             }
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(.gray, lineWidth: 4)
-                    .background(.gray)
-                    .blur(radius: 100)
-            )
         }
-
+        .frame(width: .infinity, height: 100)
         .onAppear {
             NetWorkingProvider.shared.getData(latitud: selectedCity.latitude, longitud: selectedCity.longitude, kValidDateTime: NetWorkingProvider.shared.kValidDateTimeForecastDays){ response in
                 dataResponse = response
