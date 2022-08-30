@@ -16,10 +16,8 @@ final class NetWorkingProvider {
     private let kUsername = "freelance_moyano"
     private let kPassword = "06YIYQc5mo"
     private let kBaseUrl = "https://api.meteomatics.com/"
-//    private let kValidDateTime = "2022-08-25T15:45Z"
-    private let kValidDateTime = "now"
+    private let kValidDateTime = "now--today+7DT00:00Z:P1D"
     private let kparameters = "t_2m:C,relative_humidity_2m:p,weather_symbol_1h:idx"
-//    private let kLocation = "-32.94682,-60.63932"
     private let kFormat = "json"
     
     func getData (latitud: Double, longitud: Double, success: @escaping (_ token: Response) -> (), failure: @escaping (_ error: Error?) -> ()){

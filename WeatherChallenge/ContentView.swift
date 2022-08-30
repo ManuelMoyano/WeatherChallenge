@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var locationViewModel = LocationViewModel()
-    @State private var dataResponse = Response()
+//    @State private var dataResponse = Response()
     @StateObject var selectedCities = Cities(locations: [City]())
     @State private var showingPickingSheet = false
     @State private var showingCityAlert = false
@@ -42,10 +42,9 @@ struct ContentView: View {
             Spacer()
                 Section{
                     List{
-                        ForEach (0..<selectedCities.locations.count, id: \.self){ index in
-                            Text("\(selectedCities.locations[index].name)")
-//                                WeatherView(ubicacion: selectedCities.locations[index].name, latitud: selectedCities.locations[index].latitude, longitud: selectedCities.locations[index].longitude)
-                            SelectedCityView(selectedCity: selectedCities.locations[index])
+                        ForEach (selectedCities.locations, id: \.self){ city in
+                            Text("\(city.name)")
+                            SelectedCityView(selectedCity: city)
                         }.onDelete(perform: removeItems)
                     }
                     .listStyle(.plain)
