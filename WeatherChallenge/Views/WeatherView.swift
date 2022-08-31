@@ -60,7 +60,7 @@ struct WeatherView: View {
             .padding()
             .padding(.leading,20)
             .padding(.trailing,20)
-            .shadow(color: Color.blue.opacity(0.3), radius: 20, x: 0, y: 10)
+            .shadow(color: Color.blue.opacity(0.3), radius: 20, x: 20, y: 10)
             .onAppear {
                 NetWorkingProvider.shared.getData(latitud: latitud, longitud: longitud, kValidDateTime: NetWorkingProvider.shared.kValidDateTimeForecastDays){ response in
                     dataResponse = response

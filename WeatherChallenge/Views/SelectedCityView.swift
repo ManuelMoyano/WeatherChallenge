@@ -20,6 +20,7 @@ struct SelectedCityView: View {
             HStack{
                 Text("\(selectedCity.name)")
                     .font(.system(size: 20, weight: .bold))
+                    .padding(.trailing, 10)
                 VStack(alignment: .leading) {
                     HStack{
                         Image(systemName: "thermometer")

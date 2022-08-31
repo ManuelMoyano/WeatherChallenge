@@ -44,7 +44,7 @@ struct ForecastHourView: View {
                 }
                 .background(.thinMaterial)
             }
-            .shadow(color: Color.black.opacity(0.3), radius: 10, x: 20, y: 10)
+            .shadow(color: Color.black.opacity(0.3), radius: 10, x: 5, y: 0)
             .onAppear {
                 NetWorkingProvider.shared.getData(latitud: selectedCity.latitude, longitud: selectedCity.longitude, kValidDateTime: NetWorkingProvider.shared.kvalidDateTimeNowForecastHours){ response in
                     dataResponseHours = response

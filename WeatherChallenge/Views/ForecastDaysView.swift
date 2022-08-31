@@ -40,7 +40,7 @@ struct ForecastDaysView: View {
             }
         }
         .listStyle(.plain)
-        .shadow(color: Color.black.opacity(0.3), radius: 10, x: 20, y: 10)
+        .shadow(color: Color.black.opacity(0.3), radius: 10, x: 10, y: 0)
         .onAppear {
             NetWorkingProvider.shared.getData(latitud: selectedCity.latitude, longitud: selectedCity.longitude, kValidDateTime: NetWorkingProvider.shared.kValidDateTimeForecastDays){ response in
                     dataResponseDays = response

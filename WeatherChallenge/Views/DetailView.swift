@@ -18,12 +18,12 @@ struct DetailView: View {
                 WeatherView(ubicacion: selectedCity.name, latitud: selectedCity.latitude, longitud: selectedCity.longitude)
                     .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
             }
-            .padding()
+            .padding(10)
             ForecastHourView(selectedCity: selectedCity)
-                .padding()
+                .padding(10)
             
             ForecastDaysView(selectedCity: selectedCity)
-                .padding()
+                .padding(10)
                 
         }
             .onAppear {
