@@ -21,37 +21,44 @@ struct ContentView: View {
     var body: some View {
 
         NavigationView {
-            VStack(alignment: .leading){
-                WeatherView(ubicacion: "Ubicación Actual", latitud: Double(locationViewModel.userLocation.center.latitude), longitud: Double(locationViewModel.userLocation.center.longitude))
-                    .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
-                Button {
-                    if selectedCities.locations.count < 5 {
-                        showingPickingSheet.toggle()
-                    } else {
-                        showingCityAlert.toggle()
-                    }
-                } label: {
-                    Text ("Add City")
-                    Image(systemName: "plus")
-                }.sheet(isPresented: $showingPickingSheet) {
-                    Pickingview(selectedCities: selectedCities)
-                }
-                .alert("Can't add more than 5 cities, swipe to delete ", isPresented: $showingCityAlert) {
-                    Button("OK") { }
-                }
-                Spacer()
-                    Section{
-                        List{
-                            ForEach (selectedCities.locations, id: \.self){ city in
-                                NavigationLink {
-                                    DetailView(selectedCity: city)
-                                } label:{
-                                SelectedCityView(selectedCity: city)
-                                }
-                            }.onDelete(perform: removeItems)
+            ZStack {
+//                Color.blue
+//                    .ignoresSafeArea()
+//                    .opacity(0.8)
+                VStack(alignment: .leading){
+                    WeatherView(ubicacion: "Ubicación Actual", latitud: Double(locationViewModel.userLocation.center.latitude), longitud: Double(locationViewModel.userLocation.center.longitude))
+                        .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
+                    Button {
+                        if selectedCities.locations.count < 5 {
+                            showingPickingSheet.toggle()
+                        } else {
+                            showingCityAlert.toggle()
                         }
-                        .listStyle(.plain)
+                    } label: {
+                        Text ("Add City")
+                            .padding(.leading, 20)
+                        Image(systemName: "plus")
+                    }.sheet(isPresented: $showingPickingSheet) {
+                        Pickingview(selectedCities: selectedCities)
                     }
+                    .alert("Can't add more than 5 cities, swipe to delete ", isPresented: $showingCityAlert) {
+                        Button("OK") { }
+                    }
+                    Spacer()
+                        Section{
+                            List{
+                                ForEach (selectedCities.locations, id: \.self){ city in
+                                    NavigationLink {
+                                        DetailView(selectedCity: city)
+                                    } label:{
+                                    SelectedCityView(selectedCity: city)
+                                    }
+                                }.onDelete(perform: removeItems)
+                            }
+                            .listStyle(.plain)
+                            
+                        }
+                }
             }
         }
     

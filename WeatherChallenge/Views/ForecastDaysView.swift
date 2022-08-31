@@ -17,19 +17,30 @@ struct ForecastDaysView: View {
             ForEach (0..<7){ num in
                 HStack{
                     Text("\(currentTime[num])")
+                        .frame(width: 35, height: 10, alignment: .leading)
+                    HStack{
                     Image(systemName: "drop.fill")
                         .foregroundColor(.blue)
+                        .font(.system(size: 10))
+                        .shadow(color: .gray, radius: 5, x: 1, y: 1)
                     Text("\(dataResponseDays.data?[3].coordinates?[0].dates?[num].value ?? 0.0, specifier: "%.0f") %" )
+                            .font(.system(size: 15))
+                    }.frame(width: 60, height: 10, alignment: .leading)
+                    
                     Image("\(Int(dataResponseDays.data?[4].coordinates?[0].dates?[0].value ?? 0.0))" )
                         .resizable()
                         .scaledToFit()
                         .frame(width: 30, height: 30)
-                    Text("Tmax: \(dataResponseDays.data?[1].coordinates?[0].dates?[num].value ?? 0.0, specifier: "%.0f") ºC" )
-                    Text("Tmin: \(dataResponseDays.data?[2].coordinates?[0].dates?[num].value ?? 0.0, specifier: "%.0f") ºC" )
+                        .shadow(color: .gray, radius: 10, x: 1, y: 1)
+                    Text("max")
+                    Text("\(dataResponseDays.data?[1].coordinates?[0].dates?[num].value ?? 0.0, specifier: "%.0f") ºC" )
+                    Text("min")
+                    Text("\(dataResponseDays.data?[2].coordinates?[0].dates?[num].value ?? 0.0, specifier: "%.0f") ºC" )
                 }
             }
         }
         .listStyle(.plain)
+        .shadow(color: Color.black.opacity(0.3), radius: 10, x: 20, y: 10)
         .onAppear {
             NetWorkingProvider.shared.getData(latitud: selectedCity.latitude, longitud: selectedCity.longitude, kValidDateTime: NetWorkingProvider.shared.kValidDateTimeForecastDays){ response in
                     dataResponseDays = response

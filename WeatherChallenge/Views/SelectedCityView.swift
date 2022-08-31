@@ -15,12 +15,11 @@ struct SelectedCityView: View {
     var body: some View {
         ZStack{
             Color.gray
-                .opacity(0.1)
+                .opacity(0.2)
                 .cornerRadius(16)
             HStack{
                 Text("\(selectedCity.name)")
-                    .font(.system(size: 30, weight: .bold))
-                    .padding()
+                    .font(.system(size: 20, weight: .bold))
                 VStack(alignment: .leading) {
                     HStack{
                         Image(systemName: "thermometer")
@@ -40,7 +39,6 @@ struct SelectedCityView: View {
                         
                     }
                 }
-                Spacer()
                 Image("\(Int(dataResponse.data?[4].coordinates?[0].dates?[0].value ?? 0.0))" )
                     .resizable()
                     .scaledToFit()
@@ -48,7 +46,7 @@ struct SelectedCityView: View {
                     .shadow(color: .blue, radius: 30, x: 7, y: 7)
             }
         }
-        .frame(width: .infinity, height: 100)
+        .frame(height: 100)
         .onAppear {
             NetWorkingProvider.shared.getData(latitud: selectedCity.latitude, longitud: selectedCity.longitude, kValidDateTime: NetWorkingProvider.shared.kValidDateTimeForecastDays){ response in
                 dataResponse = response

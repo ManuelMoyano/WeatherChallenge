@@ -69,7 +69,7 @@ struct WeatherView: View {
                 }
         }
         }
-        .frame(width: .infinity, height: 180)
+        .frame(height: 180)
     }
 }
 
