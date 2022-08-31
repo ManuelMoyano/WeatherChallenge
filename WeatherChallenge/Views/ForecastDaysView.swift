@@ -27,7 +27,7 @@ struct ForecastDaysView: View {
                             .font(.system(size: 15))
                     }.frame(width: 60, height: 10, alignment: .leading)
                     
-                    Image("\(Int(dataResponseDays.data?[4].coordinates?[0].dates?[0].value ?? 0.0))" )
+                    Image("\(Int(dataResponseDays.data?[4].coordinates?[0].dates?[num].value ?? 0.0))" )
                         .resizable()
                         .scaledToFit()
                         .frame(width: 30, height: 30)

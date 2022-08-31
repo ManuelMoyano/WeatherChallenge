@@ -9,10 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
-//    @State private var dataResponse = Response()
     @StateObject var selectedCities = Cities(locations: [City]())
     @State private var showingPickingSheet = false
     @State private var showingCityAlert = false
+    @State private var showingLocationSheet = false
     
     func removeItems(at offsets: IndexSet) {
         selectedCities.locations.remove(atOffsets: offsets)
@@ -22,9 +22,6 @@ struct ContentView: View {
 
         NavigationView {
             ZStack {
-//                Color.blue
-//                    .ignoresSafeArea()
-//                    .opacity(0.8)
                 VStack(alignment: .leading){
                     WeatherView(ubicacion: "Ubicación Actual", latitud: Double(locationViewModel.userLocation.center.latitude), longitud: Double(locationViewModel.userLocation.center.longitude))
                         .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)

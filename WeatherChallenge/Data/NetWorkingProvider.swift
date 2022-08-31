@@ -13,8 +13,8 @@ final class NetWorkingProvider {
     static let shared = NetWorkingProvider()
     private init(){}
     
-    private let kUsername = "freelance_moyano"
-    private let kPassword = "06YIYQc5mo"
+    private let kUsername = "freelance_challenge"
+    private let kPassword = "jm7W4mR3G2"
     private let kBaseUrl = "https://api.meteomatics.com/"
     let kValidDateTimeForecastDays = "now--today+7DT00:00Z:P1D"
     let kvalidDateTimeNowForecastHours = "now--now+23H:PT1H"

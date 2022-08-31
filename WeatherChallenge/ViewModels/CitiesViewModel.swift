@@ -8,10 +8,7 @@
 import Foundation
 
 final class CitiesViewModel {
-  
-//    static let shared = CitiesViewModel()
-//    private init(){}
-    
+      
     func loadJSON (succes: @escaping(Cities)->(), failure: @escaping(String)->()){
         if let url = Bundle.main.url(forResource: "cities", withExtension: "json"),
             let data = try? Data(contentsOf: url) {
