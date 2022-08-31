@@ -23,8 +23,12 @@ struct ContentView: View {
         NavigationView {
             ZStack {
                 VStack(alignment: .leading){
-                    WeatherView(ubicacion: "Ubicación Actual", latitud: Double(locationViewModel.userLocation.center.latitude), longitud: Double(locationViewModel.userLocation.center.longitude))
-                        .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
+                    NavigationLink {
+                        DetailView(selectedCity: City(id: 1, name: "Ubicación Actual", latitude: locationViewModel.userLocation.center.latitude, longitude: locationViewModel.userLocation.center.longitude))
+                    } label:{
+                        WeatherView(ubicacion: "Ubicación Actual", latitud: Double(locationViewModel.userLocation.center.latitude), longitud: Double(locationViewModel.userLocation.center.longitude))
+                            .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
+                    }
                     Button {
                         if selectedCities.locations.count < 5 {
                             showingPickingSheet.toggle()
